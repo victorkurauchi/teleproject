@@ -20,10 +20,23 @@ angular.module('myApp.controllers', []).
   controller('MainController', function ($scope) {
 
   }).
-  controller('ServiceController', function ($scope, Firebase) {
+  controller('ServiceController', function ($scope, Firebase, $timeout) {
     $scope.predicate = '';
 
     Firebase._construct('tarifas');
+
+    Firebase.on('loaded', function(data) {
+
+      $timeout(function() {
+
+        console.log('waddup');
+        console.log(data);
+
+        //$scope.messages.push(data.val());                       
+      },0);
+
+    });
+
 
     // var item = {
     //   'origem': '016', 

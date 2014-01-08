@@ -10,7 +10,7 @@ angular.module('myApp.services', ['firebase']).
 
   // Serviço criado para persistir dados no firebase, 
   // com a possibilidade de ser a propria persistencia em base de dados como mongodb etc..
-  .service('Firebase', function($http, $rootScope) {
+  .service('Firebase', function($rootScope, $firebase) {
 
     return {
       url: 'https://teleproject.firebaseio.com',
@@ -19,20 +19,23 @@ angular.module('myApp.services', ['firebase']).
 
       _construct: function(path) {
         this.path = path;
-        this.reference = new Firebase(this.url + '/' + path);
+        var ref = new Firebase(this.url + '/' + path);
+        this.reference = $firebase(ref);
       },
 
-      get: function(scope, localScopeVarname) {
-        var result,
-        self = this;
+      on: function(eventName, callback) {
 
-        var _ref = this.reference;
-        var data = _ref.on('value', function(snapshot) {
-          console.log(snapshot.val());
+        var _this = this;
 
-          $rootScope.localScopeVarname = snapshot.val();
+        _this.reference.$on(eventName, function () {  
 
-          return snapshot.val();
+          var args = arguments;
+
+          $rootScope.$apply(function () {
+
+            callback.apply(_this.reference, args);
+            
+          });
         });
 
       },
