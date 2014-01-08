@@ -25,13 +25,13 @@ angular.module('myApp.controllers', []).
 
     Firebase._construct('tarifas');
 
-    var item = {
-      'origem': '016', 
-      'destino': '011', 
-      'taxaminuto': 290
-    };
+    // var item = {
+    //   'origem': '016', 
+    //   'destino': '011', 
+    //   'taxaminuto': 290
+    // };
 
-    Firebase.add(item);
+    // Firebase.add(item);
 
   }).
   controller('ConcactController', function ($scope) {
