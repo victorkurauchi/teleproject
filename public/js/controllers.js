@@ -17,11 +17,27 @@ angular.module('myApp.controllers', []).
     });
 
   }).
-  controller('MyCtrl1', function ($scope) {
+  controller('MainController', function ($scope) {
+
+  }).
+  controller('ServiceController', function ($scope, Firebase) {
+    $scope.predicate = '';
+
+    Firebase._construct('tarifas');
+
+    var item = {
+      'origem': '016', 
+      'destino': '011', 
+      'taxaminuto': 290
+    };
+
+    Firebase.add(item);
+
+  }).
+  controller('ConcactController', function ($scope) {
     // write Ctrl here
 
   }).
-  controller('MyCtrl2', function ($scope) {
-    // write Ctrl here
+  controller('SimulatorController', function ($scope) {
 
   });

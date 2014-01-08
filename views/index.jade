@@ -2,18 +2,44 @@ extends layout
 
 block body
   div(ng-controller='AppCtrl')
-    h2 Hello {{name}}
-    ul.menu
-      li
-        a(href='view1') view1
-      li
-        a(href='view2') view2
+    
+    <!-- header -->
+    nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+      div.container
+        div.navbar-header
+          button(type="button", data-toggle="collapse", data-target=".navbar-ex1-collapse").navbar-toggle
+            span.sr-only toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
 
-    div(ng-view)
+          <!-- logo, its better with responsive image -->    
+          a.navbar-brand.logo-nav(href="#")
+            img(src="http://placehold.it/150x75&text=Logo")
 
-    div
-      | Angular seed app: v
-      span(app-version)
+        <!-- nav links -->
+        div.collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href="/sobre") sobre
+            li 
+              a(href="/servicos") serviços
+            li 
+              a(href="/simulacao") simulação
+            li 
+              a(href="/contato") contato
+
+    <!-- /header -->    
+
+    <!-- content -->
+    div.container
+      div(ng-view)
+
+      footer
+        hr
+        div.row
+          div.col-lg-12
+            p &copy; teleproject 2014
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')
@@ -21,3 +47,7 @@ block body
   script(src='js/controllers.js')
   script(src='js/filters.js')
   script(src='js/directives.js')
+  script(src='js/lib/bootstrap/jquery-1.10.2.js')
+  script(src='js/lib/bootstrap/bootstrap.js')
+  script(src='https://cdn.firebase.com/v0/firebase.js')
+  script(src='https://cdn.firebase.com/libs/angularfire/0.5.0-rc1/angularfire.js')

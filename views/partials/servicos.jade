@@ -1,0 +1,44 @@
+h1 FaleMais!
+p Você adquire um plano e pode falar de graça até um determinado tempo (em minutos) e só paga os minutos excedentes. Os minutos excedentes tem um acrescimo de 10% sobre a tarifa normal do minuto. Os planos são FaleMais 30 (30 minutos), FaleMais 60 (60 minutos) e FaleMais 120 (120 minutos).
+br
+
+strong.text-info Confira os planos abaixo :)
+
+hr 
+
+.panel.panel-default
+  .panel-body
+    table.table      
+      thead
+        tr
+          th(ng-click="predicate = 'clientName'; reverse=!reverse").order-column
+            strong Plano &nbsp;
+            span
+              i(ng-class="{'glyphicon-chevron-down': reverse, 'glyphicon-chevron-up': !reverse}").glyphicon  
+          th(ng-click="predicate = 'moduleName'; reverse=!reverse").order-column
+            strong Minutos por ligação &nbsp;
+            span
+              i(ng-class="{'glyphicon-chevron-down': reverse, 'glyphicon-chevron-up': !reverse}").glyphicon  
+      tbody
+        tr
+          td 
+            span FaleMais 30
+          td
+            span 30
+        tr
+          td 
+            span FaleMais 60
+          td
+            span 60
+
+        tr
+          td 
+            span FaleMais 120
+          td
+            span 120
+          
+div.clearfix
+
+{{items}}
+
+a.btn.btn-primary.btn-lg.pull-right(href="/simulacao") Faça o cálculo de suas ligações
