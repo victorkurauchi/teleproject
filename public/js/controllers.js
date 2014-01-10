@@ -21,7 +21,56 @@ angular.module('myApp.controllers', []).
 
   }).
   controller('ServiceController', function ($scope, Firebase, $timeout) {
-    $scope.predicate = '';
+
+    var tarifas = Firebase._construct('tarifas');
+
+    Firebase.on(tarifas, 'loaded', function(data) {
+
+      $timeout(function() {
+
+        var taxes = [];
+
+        for (var x in data) {
+          if (data.hasOwnProperty(x)) {
+            console.log(data[x]);
+
+            data[x].taxaminuto = parseInt(data[x].taxaminuto, 10);
+
+            taxes.push(data[x]);
+          }
+        }
+
+        $scope.taxes = taxes;
+
+      },0);
+
+    });
+
+    var planos = Firebase._construct('planos');
+    Firebase.on(planos, 'loaded', function(data) {
+
+      $timeout(function() {
+
+        var plans = [];
+
+        for (var x in data) {
+          if (data.hasOwnProperty(x)) {
+            plans.push(data[x]);
+          }
+        }
+
+        $scope.plans = plans;
+
+      },0);
+
+    });
+
+  }).
+  controller('ContactController', function ($scope) {
+    
+
+  }).
+  controller('SimulatorController', function ($scope, Firebase, $timeout) {
 
     Firebase._construct('tarifas');
 
@@ -29,10 +78,20 @@ angular.module('myApp.controllers', []).
 
       $timeout(function() {
 
-        console.log('waddup');
-        console.log(data);
+        var taxes = [];
 
-        //$scope.messages.push(data.val());                       
+        for (var x in data) {
+          if (data.hasOwnProperty(x)) {
+            console.log(data[x]);
+
+            data[x].taxaminuto = parseInt(data[x].taxaminuto, 10);
+
+            taxes.push(data[x]);
+          }
+        }
+
+        $scope.taxes = taxes;
+
       },0);
 
     });
@@ -45,12 +104,5 @@ angular.module('myApp.controllers', []).
     // };
 
     // Firebase.add(item);
-
-  }).
-  controller('ConcactController', function ($scope) {
-    // write Ctrl here
-
-  }).
-  controller('SimulatorController', function ($scope) {
 
   });

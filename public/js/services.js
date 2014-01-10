@@ -21,19 +21,19 @@ angular.module('myApp.services', ['firebase']).
         this.path = path;
         var ref = new Firebase(this.url + '/' + path);
         this.reference = $firebase(ref);
+
+        return this.reference;
       },
 
-      on: function(eventName, callback) {
+      on: function(ref, eventName, callback) {
 
-        var _this = this;
-
-        _this.reference.$on(eventName, function () {  
+        ref.$on(eventName, function () {  
 
           var args = arguments;
 
           $rootScope.$apply(function () {
 
-            callback.apply(_this.reference, args);
+            callback.apply(ref, args);
             
           });
         });

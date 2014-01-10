@@ -1,1 +1,33 @@
-h1 Faça o cálculo de suas ligações, não perca tempo e saiba como economizar.
+strong Faça o cálculo de suas ligações, não perca tempo e saiba como economizar.
+br
+span Minutos excedentes: 10% sobre a tarifa do minuto*
+br
+
+.panel.panel-default
+  .panel-body
+    table.table.table-hover      
+      thead
+        tr
+          th
+            strong DDD origem &nbsp;
+          th
+            strong DDD destino &nbsp;
+          th
+            strong $/minuto &nbsp;
+          th
+            strong Opções
+      tbody
+        tr(ng-repeat="taxe in taxes").hover
+          td 
+            span {{taxe.origem}}
+          td
+            span {{taxe.destino}}
+          td
+            span {{taxe.taxaminuto | currency:"$"}}
+          td
+            span
+              i.glyphicon.glyphicon-globe
+
+.clearfix
+
+button.btn.btn-primary.btn-lg.pull-right(type="button", data-toggle="modal", data-target="#tarifa") Cadastrar tarifa

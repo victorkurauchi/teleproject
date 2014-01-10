@@ -22,6 +22,10 @@ config(function ($routeProvider, $locationProvider) {
       templateUrl: 'partials/contato',
       controller: 'ContactController'
     }).
+    when('/simulacao', {
+      templateUrl: 'partials/simulacao',
+      controller: 'SimulatorController'
+    }).
     otherwise({
       redirectTo: '/inicio'
     });

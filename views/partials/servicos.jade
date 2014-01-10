@@ -2,41 +2,60 @@ h1 FaleMais!
 p Você adquire um plano e pode falar de graça até um determinado tempo (em minutos) e só paga os minutos excedentes. Os minutos excedentes tem um acrescimo de 10% sobre a tarifa normal do minuto. Os planos são FaleMais 30 (30 minutos), FaleMais 60 (60 minutos) e FaleMais 120 (120 minutos).
 br
 
-strong.text-info Confira os planos abaixo :)
-
 .panel.panel-default
   .panel-body
     table.table      
       thead
         tr
-          th(ng-click="predicate = 'clientName'; reverse=!reverse").order-column
+          th
             strong Plano &nbsp;
-            span
-              i(ng-class="{'glyphicon-chevron-down': reverse, 'glyphicon-chevron-up': !reverse}").glyphicon  
-          th(ng-click="predicate = 'moduleName'; reverse=!reverse").order-column
+          th
             strong Minutos por ligação &nbsp;
-            span
-              i(ng-class="{'glyphicon-chevron-down': reverse, 'glyphicon-chevron-up': !reverse}").glyphicon  
+           
       tbody
-        tr
+        tr(ng-repeat="plan in plans")
           td 
-            span FaleMais 30
+            span {{plan.descricao}}
           td
-            span 30
-        tr
-          td 
-            span FaleMais 60
-          td
-            span 60
-
-        tr
-          td 
-            span FaleMais 120
-          td
-            span 120
+            span {{plan.minutos}}
           
 div.clearfix
 
-a.btn.btn-primary.btn-lg.pull-right(href="/simulacao") Faça o cálculo de suas ligações
+strong Faça o cálculo de suas ligações, não perca tempo e saiba como economizar.
+br
+span Minutos excedentes: 10% sobre a tarifa do minuto*
+br
 
-span(ng-repeat="messages in m") m
+.panel.panel-default
+  .panel-body
+    table.table.table-hover      
+      thead
+        tr
+          th
+            strong DDD origem &nbsp;
+          th
+            strong DDD destino &nbsp;
+          th
+            strong $/minuto &nbsp;
+          th
+            strong Opções
+      tbody
+        tr(ng-repeat="taxe in taxes").hover
+          td 
+            span {{taxe.origem}}
+          td
+            span {{taxe.destino}}
+          td
+            span {{taxe.taxaminuto | currency:"$"}}
+          td
+            span
+              i.glyphicon.glyphicon-globe
+
+.btn-group.pull-right
+  button.btn.btn-primary(type="button", data-toggle="modal", data-target="#tarifa") Faça o cálculo de suas ligações &nbsp;
+    span
+      i.glyphicon.glyphicon-earphone
+  button.btn.btn-primary(type="button", data-toggle="modal", data-target="#tarifa") Cadastrar tarifa &nbsp;
+    span
+      i.glyphicon.glyphicon-plus
+
