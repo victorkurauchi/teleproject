@@ -40,10 +40,83 @@ angular.module('myApp.services', ['firebase']).
 
       },
 
-      add: function(item) {
-        var _ref = this.reference;
-        _ref.push(item);
+      add: function(ref, item) {
+        ref.$add(item);
       }
+    }
+
+  })
+  .factory('Plan', function(Firebase, $timeout, $rootScope) {
+
+    return {
+      list: function() {
+        var planos = Firebase._construct('planos');
+        Firebase.on(planos, 'loaded', function(data) {
+
+          $timeout(function() {
+
+            var plans = [];
+
+            for (var x in data) {
+              if (data.hasOwnProperty(x)) {
+                plans.push(data[x]);
+              }
+            }
+
+            $rootScope.plans = plans;
+
+          },0);
+
+        });
+      }
+    }
+
+  })
+  .factory('Taxe', function(Firebase, $timeout, $rootScope) {
+
+    return {
+
+      ref: '',
+
+      insert: function(origin, destiny, price) {
+        var item = {
+          'origem': origin, 
+          'destino': destiny, 
+          'taxaminuto': price
+        };
+
+        Firebase.add(this.ref, item);
+      },
+
+      list: function() {
+        console.log('called');
+
+        var tarifas = Firebase._construct('tarifas');
+        this.ref = tarifas;
+
+        Firebase.on(tarifas, 'loaded', function(data) {
+
+          $timeout(function() {
+
+            var taxes = [];
+
+            for (var x in data) {
+              if (data.hasOwnProperty(x)) {
+                console.log(data[x]);
+
+                //data[x].taxaminuto = parseInt(data[x].taxaminuto, 10);
+
+                taxes.push(data[x]);
+              }
+            }
+
+            $rootScope.taxes = taxes;
+
+          },0);
+
+        });
+      }
+
     }
 
   });

@@ -1,3 +1,7 @@
+div.alert.alert-danger.alert-dismissable(ng-show="message.show > 0")
+  button(type="button", data-dismiss="alert", aria-hidden="true") &times;
+  strong {{message.text}}
+
 h1 FaleMais!
 p Você adquire um plano e pode falar de graça até um determinado tempo (em minutos) e só paga os minutos excedentes. Os minutos excedentes tem um acrescimo de 10% sobre a tarifa normal do minuto. Os planos são FaleMais 30 (30 minutos), FaleMais 60 (60 minutos) e FaleMais 120 (120 minutos).
 br
@@ -52,10 +56,35 @@ br
               i.glyphicon.glyphicon-globe
 
 .btn-group.pull-right
-  button.btn.btn-primary(type="button", data-toggle="modal", data-target="#tarifa") Faça o cálculo de suas ligações &nbsp;
+  a.btn.btn-primary(href="/simulacao") Faça o cálculo de suas ligações &nbsp;
     span
       i.glyphicon.glyphicon-earphone
-  button.btn.btn-primary(type="button", data-toggle="modal", data-target="#tarifa") Cadastrar tarifa &nbsp;
+  button.btn.btn-primary(type="button", data-toggle="modal", data-target="#tx") Cadastrar tarifa &nbsp;
     span
       i.glyphicon.glyphicon-plus
+
+.modal.fade#tx(tabindex="-1", role="dialog", aria-labelledby="tarifa", aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+        h4.modal-title Cadastro de tarifa
+
+      .modal-body
+        form(role="form")
+          .form-group
+            label(for="origin") Origem 
+            input.form-control#origin(type="text", ng-model="taxe.origin", required="required")
+          
+          .form-group
+            label(for="destiny") Destino
+            input.form-control#destiny(type="text", ng-model="taxe.destiny", required="required")
+
+          .form-group
+            label(for="price") $/minuto
+            input.form-control#price(type="text", ng-model="taxe.price", required="required")
+
+      .modal-footer
+        button.btn.btn-default(type="button", data-dismiss="modal") Cancelar
+        button.btn.btn-success(type="button", data-dismiss="modal", ng-click="createTaxe()") Cadastrar
 
