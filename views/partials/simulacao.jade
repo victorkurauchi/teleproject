@@ -1,13 +1,15 @@
 form(role="form")
   .form-group
-    label(for="origin") Plano 
-    select.form-control#origin(ng-model="client", required="required", ng-options="c.nome_fantasia for c in selectClients")
+    label(for="plan") Plano 
+    select.form-control#plan(ng-model="plan", required="required", ng-options="p.descricao for p in plans")
       option
   
   .form-group
-    label(for="module") Origem/Destino
-    select.form-control#module(ng-model="module", required="required", ng-options="m.name for m in selectModules")
+    label Origem/Destino
+    select.form-control(ng-model="origin", required="required", ng-options="t.origem t.destino t.taxaminuto for t in taxes")
       option
   .form-group
-    label(for="module") Tempo da ligação (minutos)
+    label Tempo da ligação em minutos 
     input(type="number")
+
+  button.btn.btn-success(type="button", data-dismiss="modal", ng-click="simulate()") Calcular

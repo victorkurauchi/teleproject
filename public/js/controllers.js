@@ -40,6 +40,15 @@ angular.module('myApp.controllers', []).
   }).
   controller('SimulatorController', function ($scope, Taxe, Plan) {
 
+    // Populando selectboxes, onde os models tem os mesmos nomes que na view anterior,
+    // respectivamente plans e taxes
+    Plan.list();
+    Taxe.list();
+
+
+    $scope.simulate = function() {
+
+    }
     
 
   });
