@@ -6,10 +6,16 @@ form(role="form")
   
   .form-group
     label Origem/Destino
-    select.form-control(ng-model="origin", required="required", ng-options="t.origem as t.destino for t in taxes")
+    select.form-control(ng-model="origin", required="required", ng-options="t.descricao for t in taxes")
       option
   .form-group
     label Tempo da ligação em minutos 
-    input(type="number")
+    input(type="number", ng-model="time")
 
   button.btn.btn-success(type="button", data-dismiss="modal", ng-click="simulate()") Calcular
+
+  {{message}}
+  br
+  {{message2}}
+  br
+  {{message3}}

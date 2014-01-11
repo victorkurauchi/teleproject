@@ -89,8 +89,6 @@ angular.module('myApp.services', ['firebase']).
       },
 
       list: function() {
-        console.log('called');
-
         var tarifas = Firebase._construct('tarifas');
         this.ref = tarifas;
 
@@ -104,7 +102,7 @@ angular.module('myApp.services', ['firebase']).
               if (data.hasOwnProperty(x)) {
                 console.log(data[x]);
 
-                //data[x].taxaminuto = parseInt(data[x].taxaminuto, 10);
+                data[x].descricao = 'Origem ' + data[x].origem + ' / Destino ' + data[x].destino + ' - R$' + data[x].taxaminuto;
 
                 taxes.push(data[x]);
               }
@@ -115,6 +113,34 @@ angular.module('myApp.services', ['firebase']).
           },0);
 
         });
+      },
+
+      simulate: function(origin, plan, minutes) {
+
+        var costWithPlan, costWithoutPlan;
+        var pricePerMinute = parseFloat(origin.taxaminuto);
+        var result = {};
+
+        console.log(pricePerMinute);
+        console.log(typeof pricePerMinute);
+
+        // Calculo com planos falemais
+        // se os minutos informados pelo usuário NÃO exceder o que o plano oferece, não será cobrado a mais
+        if (minutes <= plan.minutos) {
+          costWithPlan = 0;
+        } else if (minutes > plan.minutos) {
+          var difference = (minutes - plan.minutos);
+          console.log(difference);
+
+          costWithPlan = pricePerMinute * difference;
+        }
+
+        costWithoutPlan = pricePerMinute * minutes;
+
+        console.log('Custo com plano: ' + 'R$' + costWithPlan);
+        console.log('Custo sem plano: ' + 'R$' + costWithoutPlan);
+
+
       }
 
     }
