@@ -6,7 +6,7 @@ form(role="form")
   
   .form-group
     label Origem/Destino
-    select.form-control(ng-model="origin", required="required", ng-options="t.origem t.destino t.taxaminuto for t in taxes")
+    select.form-control(ng-model="origin", required="required", ng-options="t.origem as t.destino for t in taxes")
       option
   .form-group
     label Tempo da ligação em minutos 
