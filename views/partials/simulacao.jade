@@ -26,5 +26,5 @@ hr
   p Com FaleMais: {{result.withPlan | currency:"$"}}
   p Sem FaleMais: {{result.withoutPlan | currency:"$"}}
 
-  strong Tarifa por minuto: {{result.taxe | currency:"$"}}, Plano: {{result.plan}}, Minutos: {{result.minutes}}
+  strong Tarifa por minuto: {{result.taxe | currency:"$"}}, Plano: {{result.plan.descricao}}, Minutos: {{result.time}}
 
