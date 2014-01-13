@@ -15,7 +15,16 @@ form(role="form")
   button.btn.btn-success(type="button", data-dismiss="modal", ng-click="simulate()") Calcular
 
   {{message}}
-  br
-  {{message2}}
-  br
-  {{message3}}
+
+.clearfix
+
+hr
+
+.jumbotron(ng-show="displayResult > 0")
+  h1 Simulação
+
+  p Com FaleMais: {{result.withPlan | currency:"$"}}
+  p Sem FaleMais: {{result.withoutPlan | currency:"$"}}
+
+  strong Tarifa por minuto: {{result.taxe | currency:"$"}}, Plano: {{result.plan}}, Minutos: {{result.minutes}}
+

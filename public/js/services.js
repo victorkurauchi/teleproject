@@ -121,9 +121,6 @@ angular.module('myApp.services', ['firebase']).
         var pricePerMinute = parseFloat(origin.taxaminuto);
         var result = {};
 
-        console.log(pricePerMinute);
-        console.log(typeof pricePerMinute);
-
         // Calculo com planos falemais
         // se os minutos informados pelo usuário NÃO exceder o que o plano oferece, não será cobrado a mais
         if (minutes <= plan.minutos) {
@@ -140,6 +137,15 @@ angular.module('myApp.services', ['firebase']).
         console.log('Custo com plano: ' + 'R$' + costWithPlan);
         console.log('Custo sem plano: ' + 'R$' + costWithoutPlan);
 
+        result.withPlan    = costWithPlan;
+        result.withoutPlan = costWithoutPlan;
+        result.taxe        = pricePerMinute;
+        result.plan        = plan;
+        result.time        = minutes;
+
+        $rootScope.displayResult = 1;
+
+        return result;
 
       }
 

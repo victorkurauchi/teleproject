@@ -47,11 +47,11 @@ angular.module('myApp.controllers', []).
 
 
     $scope.simulate = function() {
-      $scope.message = $scope.origin;
-      $scope.message2 = $scope.plan;
-      $scope.message3 = $scope.time;
 
-      Taxe.simulate($scope.origin, $scope.plan, $scope.time);
+      var result = Taxe.simulate($scope.origin, $scope.plan, $scope.time);
+
+      $scope.result = result;
+
     }
     
 
